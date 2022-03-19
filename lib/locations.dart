@@ -9,7 +9,7 @@ class Locations {
 
   Locations({required this.url, required this.cityName});
 
-  void calculateTime() async {
+  Future<void> calculateTime() async {
     var response =
         await get(Uri.parse("https://worldtimeapi.org/api/timezone/$url"));
     if (response.statusCode == 200) {
@@ -19,7 +19,6 @@ class Locations {
       DateTime rawdatetime = DateTime.parse(jsonData["datetime"]);
       DateTime datetime = rawdatetime.add(Duration(hours: offset));
       currentTime = DateFormat.Hm().format(datetime);
-      print(currentTime);
     }
   }
 }
