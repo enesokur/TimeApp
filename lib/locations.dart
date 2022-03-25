@@ -5,9 +5,12 @@ import 'package:intl/intl.dart';
 class Locations {
   String url;
   String cityName;
-  String? currentTime;
+  String currentTime;
 
-  Locations({required this.url, required this.cityName});
+  Locations(
+      {required this.url,
+      required this.cityName,
+      this.currentTime = "default"});
 
   Future<void> calculateTime() async {
     var response =

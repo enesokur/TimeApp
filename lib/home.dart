@@ -1,7 +1,6 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'locations.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -9,16 +8,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Locations instance = Locations(url: "Europe/Istanbul", cityName: "Istanbul");
-  @override
-  void initState() async {
-    // TODO: implement initState
-    super.initState();
-    await instance.calculateTime();
-  }
-
+  Map data = {};
   @override
   Widget build(BuildContext context) {
+    if (data.isEmpty) {
+      data = ModalRoute.of(context)!.settings.arguments as Map;
+    }
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -31,7 +26,16 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+                dynamic dataFromPop =
+                    await Navigator.pushNamed(context, "/chooselocation");
+                setState(() {
+                  data = {
+                    "cityName": dataFromPop["cityName"],
+                    "currentTime": dataFromPop["currentTime"],
+                  };
+                });
+              },
               icon: Icon(
                 Icons.location_on_rounded,
                 size: 15,
@@ -49,7 +53,7 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  instance.cityName,
+                  data["cityName"],
                   style: TextStyle(
                     fontSize: 15.0,
                     color: Colors.blue,
@@ -60,7 +64,7 @@ class _HomeState extends State<Home> {
                   width: 5.0,
                 ),
                 Text(
-                  instance.currentTime!,
+                  data["currentTime"],
                   style: TextStyle(
                     fontSize: 15.0,
                     color: Colors.blue,
