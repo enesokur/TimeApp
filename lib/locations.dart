@@ -6,11 +6,13 @@ class Locations {
   String url;
   String cityName;
   String currentTime;
+  bool isDay;
 
   Locations(
       {required this.url,
       required this.cityName,
-      this.currentTime = "default"});
+      this.currentTime = "default",
+      this.isDay = true});
 
   Future<void> calculateTime() async {
     var response =
@@ -22,6 +24,11 @@ class Locations {
       DateTime rawdatetime = DateTime.parse(jsonData["datetime"]);
       DateTime datetime = rawdatetime.add(Duration(hours: offset));
       currentTime = DateFormat.Hm().format(datetime);
+      if (datetime.hour >= 6 && datetime.hour < 19) {
+        isDay = true;
+      } else {
+        isDay = false;
+      }
     }
   }
 }

@@ -13,7 +13,7 @@ class ChooseLocation extends StatelessWidget {
     Locations(url: "Europe/Kiev", cityName: "Kiev"),
     Locations(url: "Europe/Rome", cityName: "Rome"),
     Locations(url: "Europe/Paris", cityName: "Paris"),
-    Locations(url: "Europe/New_York", cityName: "New York"),
+    Locations(url: "America/New_York", cityName: "New York"),
     Locations(url: "Europe/Budapest", cityName: "Budapest"),
     Locations(url: "Europe/Warsaw", cityName: "Warsaw"),
     Locations(url: "Asia/Baku", cityName: "Baku"),
@@ -41,6 +41,7 @@ class ChooseLocation extends StatelessWidget {
               Navigator.pop(context, {
                 "cityName": instance.cityName,
                 "currentTime": instance.currentTime,
+                "isDay": instance.isDay,
               });
             },
             tileColor: Colors.orange[200],

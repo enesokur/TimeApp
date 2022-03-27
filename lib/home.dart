@@ -9,16 +9,22 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Map data = {};
+  String image = "";
   @override
   Widget build(BuildContext context) {
     if (data.isEmpty) {
       data = ModalRoute.of(context)!.settings.arguments as Map;
     }
+    if (data["isDay"]) {
+      image = "Day.jpg";
+    } else {
+      image = "Night.jpg";
+    }
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/Day.jpg"),
+            image: AssetImage("assets/$image"),
             fit: BoxFit.cover,
           ),
         ),
@@ -33,19 +39,22 @@ class _HomeState extends State<Home> {
                   data = {
                     "cityName": dataFromPop["cityName"],
                     "currentTime": dataFromPop["currentTime"],
+                    "isDay": dataFromPop["isDay"],
                   };
                 });
               },
               icon: Icon(
                 Icons.location_on_rounded,
-                size: 15,
+                size: 25.0,
+                color: Colors.white,
               ),
               label: Text(
                 "Choose a Location",
                 style: TextStyle(
                   letterSpacing: 1.0,
-                  fontSize: 15.0,
-                  color: Colors.blue,
+                  fontSize: 25.0,
+                  color: Colors.white,
+                  fontFamily: "NotoSans",
                 ),
               ),
             ),
@@ -55,9 +64,10 @@ class _HomeState extends State<Home> {
                 Text(
                   data["cityName"],
                   style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.blue,
+                    fontSize: 25.0,
+                    color: Colors.white,
                     letterSpacing: 1.0,
+                    fontFamily: "NotoSans",
                   ),
                 ),
                 SizedBox(
@@ -66,9 +76,10 @@ class _HomeState extends State<Home> {
                 Text(
                   data["currentTime"],
                   style: TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.blue,
+                    fontSize: 25.0,
+                    color: Colors.white,
                     letterSpacing: 1.0,
+                    fontFamily: "NotoSans",
                   ),
                 ),
               ],

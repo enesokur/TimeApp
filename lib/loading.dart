@@ -16,6 +16,7 @@ class _LoadingState extends State<Loading> {
     Navigator.pushReplacementNamed(context, "/home", arguments: {
       "cityName": instance.cityName,
       "currentTime": instance.currentTime,
+      "isDay": instance.isDay,
     });
   }
 
@@ -35,7 +36,8 @@ class _LoadingState extends State<Loading> {
           style: TextStyle(
             color: Colors.white,
             letterSpacing: 1.0,
-            fontSize: 20.0,
+            fontSize: 25.0,
+            fontFamily: "NotoSans",
           ),
         ),
       ),
